@@ -1,0 +1,34 @@
+export class Dice {
+  nbFaces: number;
+
+  constructor(nbFaces: number) {
+    this.nbFaces = nbFaces;
+  }
+
+  roll() {
+    return Math.floor(Math.random() * this.nbFaces) + 1;
+  }
+}
+
+export class Dice20 extends Dice {
+  constructor() {
+    super(20);
+  }
+
+  rollAndCheck(threshold: number) {
+    const res = this.roll();
+
+    if (this.nbFaces === 20) {
+      if (res === 1) return false;
+      if (res === 20) return true;
+    }
+
+    return res >= threshold;
+  }
+}
+
+export const d4 = new Dice(4);
+export const d6 = new Dice(6);
+export const d10 = new Dice(10);
+export const d12 = new Dice(12);
+export const d20 = new Dice20();
