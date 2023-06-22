@@ -1,4 +1,4 @@
-export class Dice {
+export default class Die {
   protected nbFaces: number;
 
   constructor(nbFaces: number) {
@@ -10,7 +10,7 @@ export class Dice {
   }
 }
 
-export class Dice20 extends Dice {
+export class Die20 extends Die {
   constructor() {
     super(20);
   }
@@ -29,8 +29,9 @@ export class Dice20 extends Dice {
 
 // Je déclare les dés directement ici, ca évite d'avoir x
 // instances pour un dé ayant le même nombre de faces
-export const d4 = new Dice(4);
-export const d6 = new Dice(6);
-export const d10 = new Dice(10);
-export const d12 = new Dice(12);
-export const d20 = new Dice20();
+export const d4 = new Die(4);
+export const d6 = new Die(6);
+export const d8 = new Die(8);
+export const d10 = new Die(10);
+export const d12 = new Die(12);
+export const d20 = new Die20();

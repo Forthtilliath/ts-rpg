@@ -3,7 +3,7 @@ import { d6 } from "./Dice.ts";
 
 const STATS = ["str", "dex", "con", "int", "wis", "cha"] as const;
 
-export class Character {
+export default class Character {
   private name: string;
 
   // J'assure que l'attribut aura une valeur via le !
