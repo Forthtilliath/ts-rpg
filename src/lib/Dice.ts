@@ -1,5 +1,5 @@
 export class Dice {
-  nbFaces: number;
+  protected nbFaces: number;
 
   constructor(nbFaces: number) {
     this.nbFaces = nbFaces;
@@ -27,6 +27,8 @@ export class Dice20 extends Dice {
   }
 }
 
+// Je déclare les dés directement ici, ca évite d'avoir x
+// instances pour un dé ayant le même nombre de faces
 export const d4 = new Dice(4);
 export const d6 = new Dice(6);
 export const d10 = new Dice(10);

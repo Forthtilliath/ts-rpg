@@ -5,17 +5,19 @@ const STATS = ["str", "dex", "con", "int", "wis", "cha"] as const;
 
 export class Character {
   private name: string;
-  
-  str!: number;
-  dex!: number;
-  con!: number;
-  int!: number;
-  wis!: number;
-  cha!: number;
+
+  // J'assure que l'attribut aura une valeur via le !
+  private str!: number;
+  private dex!: number;
+  private con!: number;
+  private int!: number;
+  private wis!: number;
+  private cha!: number;
 
   constructor(name: string) {
     this.name = name;
 
+    // Si une des stats ne correspond pas à un attribut => erreur
     STATS.forEach((stat) => {
       this[stat] = d6.roll() + d6.roll() + d6.roll();
     });
@@ -29,6 +31,6 @@ export class Character {
     - CON: ${this.con}
     - INT: ${this.int}
     - WIS: ${this.wis}
-    - CHA: ${this.cha}`
+    - CHA: ${this.cha}`;
   }
 }

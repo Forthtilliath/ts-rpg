@@ -1,8 +1,6 @@
 /**
- * Retire les espaces au début
- * @param callSite 
- * @param args 
- * @returns 
+ * Retire l'indentation
+ * @link https://stackoverflow.com/questions/25924057/multiline-strings-that-dont-break-indentation
  */
 export function dedent(
   callSite: string | Function | TemplateStringsArray,
