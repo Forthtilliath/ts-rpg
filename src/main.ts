@@ -13,10 +13,20 @@ console.log(forth);
 console.log(d20.roll());
 console.log(d6.roll());
 
-const forceChar = new Character("Wellby");
-console.log(forceChar.toString())
+const wellby = new Character("Wellby");
+console.log(wellby.toString());
 
 console.log("5+: ", d20.rollAndCheck(5));
 console.log("5+: ", d20.rollAndCheck(5));
 console.log("15+: ", d20.rollAndCheck(15));
 console.log("15+: ", d20.rollAndCheck(15));
+
+const party: RPG.Party = {
+  startDate: new Date(),
+  endDate: new Date(),
+  location: "Nowhere",
+  organizer: forth,
+  players: new Map([[forth, wellby]]),
+};
+
+console.log(party)
