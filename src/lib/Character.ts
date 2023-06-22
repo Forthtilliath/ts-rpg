@@ -1,3 +1,4 @@
+import { sum } from "../shared/number.ts";
 import { dedent } from "../shared/string.ts";
 import { d6 } from "./Dice.ts";
 
@@ -19,11 +20,14 @@ export class Character {
 
     // Si une des stats ne correspond pas à un attribut => erreur
     STATS.forEach((stat) => {
-      this[stat] = d6.roll() + d6.roll() + d6.roll();
+      this[stat] = this.rollDiceToInitiateStat();
+      // this[stat] = d6.roll() + d6.roll() + d6.roll();
     });
+
+    this.rollDiceToInitiateStat();
   }
 
-  toString() {
+  public toString() {
     return dedent`Character: ${this.name}
     Stats:
     - STR: ${this.str}
@@ -32,5 +36,15 @@ export class Character {
     - INT: ${this.int}
     - WIS: ${this.wis}
     - CHA: ${this.cha}`;
+  }
+
+  private rollDiceToInitiateStat() {
+    const dice = Array(4)
+      .fill(0)
+      .map(() => d6.roll())
+      .sort((a, b) => b - a);
+    dice.length = 3;
+
+    return sum(dice);
   }
 }
