@@ -9,12 +9,14 @@ export class Character {
   private race: string;
 
   // J'assure que l'attribut aura une valeur via le !
-  private str!: number;
-  private dex!: number;
-  private con!: number;
-  private int!: number;
-  private wis!: number;
-  private cha!: number;
+  private stats = {
+    str: 0,
+    dex: 0,
+    con: 0,
+    wis: 0,
+    int: 0,
+    cha: 0,
+  };
 
   constructor(name: string) {
     this.name = name;
@@ -22,13 +24,13 @@ export class Character {
     const races = Object.entries(RACE);
     const race = races[Dice.roll(races.length) - 1];
     this.race = contantKeyToString(race[0]);
-    console.log(race[1]);
 
     // Si une des stats ne correspond pas à un attribut => erreur
     STATS.forEach((stat) => {
-      this[stat] = this.rollDiceToInitiateStat();
+      this.stats[stat] = this.rollDiceToInitiateStat();
     });
-    
+    console.log(...Object.entries(this.stats))
+
     const abilityBonus = Object.entries(race[1].ability) as [
       RPG.StatRace,
       number
@@ -36,11 +38,12 @@ export class Character {
     abilityBonus.forEach(([stat, bonus]) => {
       if (stat === "other1" || stat === "other2") {
         const randomStat = STATS[Dice.roll(STATS.length) - 1];
-        this[randomStat] += bonus;
+        this.stats[randomStat] += bonus;
       } else {
-        this[stat] += bonus;
+        this.stats[stat] += bonus;
       }
     });
+    console.log(...Object.entries(this.stats))
 
     this.rollDiceToInitiateStat();
   }
@@ -49,12 +52,12 @@ export class Character {
     return dedent`Character: ${this.name}
     Race: ${this.race}
     Stats:
-    - STR: ${this.str}
-    - DEX: ${this.dex}
-    - CON: ${this.con}
-    - INT: ${this.int}
-    - WIS: ${this.wis}
-    - CHA: ${this.cha}`;
+    - STR: ${this.stats.str}
+    - DEX: ${this.stats.dex}
+    - CON: ${this.stats.con}
+    - INT: ${this.stats.int}
+    - WIS: ${this.stats.wis}
+    - CHA: ${this.stats.cha}`;
   }
 
   private rollDiceToInitiateStat() {
