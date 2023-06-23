@@ -8,7 +8,6 @@ export class Character {
   private name: string;
   private race: string;
 
-  // J'assure que l'attribut aura une valeur via le !
   private stats = {
     str: 0,
     dex: 0,
