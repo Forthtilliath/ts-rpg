@@ -28,3 +28,14 @@ export function dedent(
 
   return format(output);
 }
+
+export function capitalize(str: string) {
+  return str.charAt(0).toUpperCase() + str.slice(1);
+}
+
+export function contantKeyToString(str: string) {
+  const words = str.toLowerCase().split("_");
+  const capitalized = words.map(capitalize);
+
+  return capitalized.join("-");
+}

@@ -1,4 +1,4 @@
-import type { RPG } from "../@types/rpg.ts";
+import type { RPG } from "./@types/rpg.js";
 import { Character } from "./lib/Character.ts";
 
 const forth: RPG.Player = {
@@ -18,3 +18,4 @@ const party: RPG.Party = {
 };
 
 console.log(party);
+console.log(party.players.get(forth))

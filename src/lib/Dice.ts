@@ -5,8 +5,12 @@ export class Dice {
     this.nbFaces = nbFaces;
   }
 
-  roll() {
+  public roll() {
     return Math.floor(Math.random() * this.nbFaces) + 1;
+  }
+
+  static roll(n: number) {
+    return Math.floor(Math.random() * n) + 1;
   }
 }
 
