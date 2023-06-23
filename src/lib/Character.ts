@@ -6,7 +6,7 @@ import { RACE, STATS } from "./constants.ts";
 
 export class Character {
   private name: string;
-  private race: string;
+  private race = "";
 
   private stats = {
     str: 0,
@@ -17,34 +17,18 @@ export class Character {
     cha: 0,
   };
 
-  constructor(name: string) {
-    this.name = name;
-
-    const races = Object.entries(RACE);
-    const race = races[Dice.roll(races.length) - 1];
-    this.race = contantKeyToString(race[0]);
+  constructor(props: RPG.CharacterProps) {
+    this.name = props.name;
 
     // Si une des stats ne correspond pas à un attribut => erreur
     STATS.forEach((stat) => {
-      this.stats[stat] = this.rollDiceToInitiateStat();
+      // Le + est là seulement pour avoir le choix de où placer le setRace()
+      this.stats[stat] += this.rollDiceToInitiateStat();
     });
-    console.log(...Object.entries(this.stats))
+    console.log(...Object.entries(this.stats));
 
-    const abilityBonus = Object.entries(race[1].ability) as [
-      RPG.StatRace,
-      number
-    ][];
-    abilityBonus.forEach(([stat, bonus]) => {
-      if (stat === "other1" || stat === "other2") {
-        const randomStat = STATS[Dice.roll(STATS.length) - 1];
-        this.stats[randomStat] += bonus;
-      } else {
-        this.stats[stat] += bonus;
-      }
-    });
-    console.log(...Object.entries(this.stats))
-
-    this.rollDiceToInitiateStat();
+    this.setRace(props.race);
+    console.log(...Object.entries(this.stats));
   }
 
   public toString() {
@@ -67,5 +51,22 @@ export class Character {
     dice.length = 3;
 
     return sum(dice);
+  }
+
+  private setRace(raceKey: RPG.RaceKey) {
+    this.race = contantKeyToString(raceKey);
+
+    const abilityBonus = Object.entries(RACE[raceKey].ability) as [
+      RPG.StatRace,
+      number
+    ][];
+    abilityBonus.forEach(([stat, bonus]) => {
+      if (stat === "other1" || stat === "other2") {
+        const randomStat = STATS[Dice.roll(STATS.length) - 1];
+        this.stats[randomStat] += bonus;
+      } else {
+        this.stats[stat] += bonus;
+      }
+    });
   }
 }

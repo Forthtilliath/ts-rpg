@@ -1,5 +1,5 @@
 import { Character as C_Character } from "../lib/Character.ts";
-import { STATS } from "../lib/constants.ts";
+import { RACE, STATS } from "../lib/constants.ts";
 
 export namespace RPG {
   type Player = {
@@ -23,11 +23,15 @@ export namespace RPG {
 
   type Skill = Record<string, Stat>;
 
-  type Race = Record<
-    string,
-    {
-      ability: Partial<Record<StatRace, number>>;
-      // ability: Record<Partial<Stat>, number>;
-    }
-  >;
+  type RaceValue = {
+    ability: Partial<Record<StatRace, number>>;
+  };
+  type Race = Record<string, RaceValue>;
+
+  type RaceKey = keyof typeof RACE;
+
+  type CharacterProps = {
+    name: string;
+    race: RaceKey;
+  };
 }

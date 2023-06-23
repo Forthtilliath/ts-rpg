@@ -34,7 +34,7 @@ export const SKILL: RPG.Skill = {
 } as const;
 
 // https://www.aidedd.org/en/rules/races/half-orc/
-export const RACE: RPG.Race = {
+export const RACE = {
   DWARF: {
     ability: { con: +2 },
   },
@@ -62,4 +62,4 @@ export const RACE: RPG.Race = {
   TIEFLING: {
     ability: { int: +1, cha: +2 },
   },
-} as const;
+} as const satisfies RPG.Race;
