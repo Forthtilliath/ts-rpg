@@ -1,65 +1,36 @@
-import type { RPG } from "../@types/rpg.js";
+import type { Skill } from '@/@types/rpg'
 
-export const STATS = ["str", "dex", "con", "int", "wis", "cha"] as const;
+export enum STAT {
+  STR = 'STR',
+  DEX = 'DEX',
+  CON = 'CON',
+  INT = 'INT',
+  WIS = 'WIS',
+  CHA = 'CHA',
+}
 
-export const DIFFICULTY = {
-  VERY_EASY: 0,
-  EASY: 5,
-  MEDIUM: 10,
-  TRICKY: 15,
-  HARD: 20,
-  VERY_HARD: 25,
-  HEROIC: 30,
-  ALMOST_IMPOSSIBLE: 40,
-} as const;
+export const SKILL = {
+  ACROBATIC: { label: 'Acrobatics', stat: STAT.DEX },
+  ANIMAL_HANDLING: { label: 'Animal Handling', stat: STAT.WIS },
+  ARCANA: { label: 'Arcana', stat: STAT.INT },
+  ATHLETICS: { label: 'Athletics', stat: STAT.STR },
+  DECEPTION: { label: 'Deception', stat: STAT.CHA },
+  HISTORY: { label: 'History', stat: STAT.INT },
+  INSIGHT: { label: 'Insight', stat: STAT.WIS },
+  INTIMIDATION: { label: 'Intimidation', stat: STAT.CHA },
+  INVESTIGATION: { label: 'Investigation', stat: STAT.WIS },
+  MEDICINE: { label: 'Medicine', stat: STAT.WIS },
+  NATURE: { label: 'Nature', stat: STAT.INT },
+  PERCEPTION: { label: 'Perception', stat: STAT.WIS },
+  PERFORMANCE: { label: 'Performance', stat: STAT.CHA },
+  PERSUASION: { label: 'Persuasion', stat: STAT.CHA },
+  RELIGION: { label: 'Religion', stat: STAT.INT },
+  SLEIGHT_OF_HAND: { label: 'Sleight of Hand', stat: STAT.DEX },
+  STEALTH: { label: 'Stealth', stat: STAT.DEX },
+  SURVIVAL: { label: 'Survival', stat: STAT.WIS },
+} as const satisfies Record<string, Skill>
 
-export const SKILL: RPG.Skill = {
-  ACROBATICS: "dex",
-  ANIMAL_HANDLING: "wis",
-  ARCANA: "int",
-  ATHLETICS: "str",
-  DECEPTION: "cha",
-  HISTORY: "int",
-  INSIGHT: "wis",
-  INITIMIDATION: "cha",
-  MEDECINE: "wis",
-  NATURE: "int",
-  PERCEPTION: "wis",
-  PERFORMANCE: "cha",
-  PERSUASION: "cha",
-  RELIGION: "int",
-  SLEIGHT_OF_HAND: "dex",
-  STEALTH: "dex",
-  SURVIVAL: "wis",
-} as const;
-
-// https://www.aidedd.org/en/rules/races/half-orc/
-export const RACE = {
-  DWARF: {
-    ability: { con: +2 },
-  },
-  ELF: {
-    ability: { dex: +2 },
-  },
-  HALFLING: {
-    ability: { dex: +2 },
-  },
-  HUMAN: {
-    ability: { str: +1, dex: +1, con: +1, wis: +1, int: +1, cha: +1 },
-  },
-  DRAGONBORN: {
-    ability: { str: +2, cha: +1 },
-  },
-  GNOME: {
-    ability: { int: +2 },
-  },
-  HALF_ELF: {
-    ability: { cha: +2, other1: +1, other2: +1 },
-  },
-  HALF_ORC: {
-    ability: { str: +2, con: +1 },
-  },
-  TIEFLING: {
-    ability: { int: +1, cha: +2 },
-  },
-} as const satisfies RPG.Race;
+export const ROLL = {
+  FAIL: -1,
+  SUCCESS: 100,
+}

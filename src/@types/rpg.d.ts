@@ -1,37 +1,55 @@
-import { Character as C_Character } from "../lib/Character.ts";
-import { RACE, STATS } from "../lib/constants.ts";
+import { SKILL, STAT } from '@/lib/constants'
 
-export namespace RPG {
-  type Player = {
-    name: string;
-    mail: string;
-    avatar: string;
-  };
-
-  type Party = {
-    startDate: Date;
-    endDate: Date;
-    location: string;
-    organizer: Player;
-    // Attention ici, il faut bien que ce soit la classe et non le type
-    // Sinon ca bloque au niveau de la création de l'objet
-    players: Map<Player, C_Character>;
-  };
-
-  type Stat = (typeof STATS)[number];
-  type StatRace = Stat | "other1" | "other2";
-
-  type Skill = Record<string, Stat>;
-
-  type RaceValue = {
-    ability: Partial<Record<StatRace, number>>;
-  };
-  type Race = Record<string, RaceValue>;
-
-  type RaceKey = keyof typeof RACE;
-
-  type CharacterProps = {
-    name: string;
-    race: RaceKey;
-  };
+export type Character = {
+  lvl: number
+  strBase: number
+  dexBase: number
+  conBase: number
+  intBase: number
+  wisBase: number
+  chaBase: number
+  currExpPoints: number
+  skills: SkillMastery[]
+  miscProficiencies: Record<string, string>
+  name: string
+  alignment: string
+  background: string
+  personnalityTraits: string[]
+  ideals: string[]
+  bonds: string[]
+  flaws: string[]
 }
+
+export type Player = {
+  name: string
+  mail: string
+  avatar: string
+}
+
+export type Party = {
+  startDate: Date
+  endDate: Date
+  location: string
+  organizer: Player
+  players: Map<Player, Character>
+  game: Game
+}
+
+export type Game = {
+  name: string
+  editor: string
+  author: string
+}
+
+export type Skill = {
+  label: string
+  stat: STAT
+}
+
+export type SkillMastery = Skill & {
+  training: boolean
+}
+
+export type SkillLabel = (typeof SKILL)[keyof typeof SKILL]['label']
+
+export type StatKey = `${Lowercase<keyof typeof STAT>}Base`

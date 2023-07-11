@@ -1,8 +1,18 @@
-Pour générer le fichier de déclaration
-``tsc --declaration src/lib/Dice.ts``
+## RPG Factory
 
-Pour lancer le script sur node :
-``ts-node-esm src/main.ts``
+Bon bon bon, on va foutre quoi ici...
 
-Pour lancer le script sur navigateur (dans la console) :
-``pnpm run dev``
+- Character
+
+  - skills
+  - roll(skill, threshold)
+
+- Party
+
+  - startDate
+  - endDate
+  - location
+  - organizer
+  - players
+
+- Game
