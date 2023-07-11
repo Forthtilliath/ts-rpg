@@ -1,5 +1,5 @@
 import type { StatKey } from '@/@types/rpg'
-import { numberWithSignFormatter } from '@/lib/formatters'
+import { numberWithSignFormatter } from '@/services/utilities/formatters'
 import { useCharacterStore } from '@/services/zustand/store'
 
 type Props = {
